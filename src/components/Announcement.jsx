@@ -15,6 +15,7 @@ const Announcement = () => {
   return (
     <Container>
         Super Deal! Fri frakt vid beställningar över 1000 kr
+        <p>Köp två betala för tre!</p>
     </Container>
   )
 }
