@@ -40,4 +40,46 @@ export const categories = [
         title: 'Mobiltelefoner'
     },
 
+];
+
+export const popularProducts = [
+    {
+        id: 1,
+        img: 'https://www.komplett.se/img/p/1200/1220188.jpg'
+    },
+
+    {
+        id: 2,
+        img: 'https://www.komplett.se/img/p/1200/1220599.jpg'
+    },
+
+    {
+        id: 3,
+        img: 'https://www.komplett.se/img/p/1200/1205264.jpg'
+    },
+
+    {
+        id: 4,
+        img: 'https://www.komplett.se/img/p/1080/1196475.jpg'
+    },
+
+    {
+        id: 5,
+        img: 'https://www.komplett.se/img/p/1200/1206504.jpg'
+    },
+
+    {
+        id: 6,
+        img: 'https://www.komplett.se/img/p/420/1220783.jpg'
+    },
+
+    {
+        id: 7,
+        img: 'https://www.komplett.se/img/p/1200/1213715.jpg'
+    },
+
+    {
+        id: 8,
+        img: 'https://www.komplett.se/img/p/1200/1207175.jpg'
+    }
 ]
