@@ -4,6 +4,8 @@ import {Search, ShoppingCartOutlined} from '@material-ui/icons';
 import { Badge } from '@material-ui/core';
 
 const Container = styled.div`
+    background: rgb(14,11,20);
+    background: radial-gradient(circle, rgba(253,253,253,1) 3%, rgba(40,224,100,1) 28%, rgba(112,38,177,1) 74%);
     height: 60px;
 `;
 const Wrapper = styled.div`
