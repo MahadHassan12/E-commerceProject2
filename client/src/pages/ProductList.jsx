@@ -52,7 +52,7 @@ const ProductList = () => {
                     <Option>Grå</Option>
                 </Select>
                 <Select>
-                    <Option disabled selected >Storleks skärm</Option>
+                    <Option disabled selected >Storlek skärm</Option>
                     <Option>Liten</Option>
                     <Option>Mellan</Option>
                     <Option>Stor</Option>
