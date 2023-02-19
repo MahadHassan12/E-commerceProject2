@@ -25,11 +25,13 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 const db = require('../models/');
-db.sequelize.sync({force:true}).then(() => {
+db.sequelize
+.sync({force:true})
+.then(() => {
   server.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
   });
-}).catch(e => {
+}).catch((e) => {
   console.log(e);
 });
 
