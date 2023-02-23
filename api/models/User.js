@@ -6,9 +6,12 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
         },
         username: {
-            type: DataTypes.STRING(16),
+            type: DataTypes.STRING(50),
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                len:[4, 200],
+            }
         },
         password: {
             type: DataTypes.STRING(16),
@@ -16,13 +19,18 @@ module.exports = (sequelize, DataTypes) => {
         },
         
         email: {
-            type: DataTypes.STRING(16),
+            type: DataTypes.STRING(200),
             allowNull: false, 
-            unique: true
-        },
+            unique: true,
+            validate: {
+                len:[4, 200],
+                isEmail: true
+            }
 
-        role: {
-            type: DataTypes.ENUM('casual', 'logged-in', 'admin')
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN(),
+            default: false
         },
     },
     { underscored: true}
