@@ -1,12 +1,13 @@
+const bcrypt = require('bcrypt')
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('User', {
+    const User = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
         username: {
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(70),
             allowNull: false,
             unique: true,
             validate: {
@@ -14,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         password: {
-            type: DataTypes.STRING(16),
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         
@@ -30,9 +31,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         isAdmin: {
             type: DataTypes.BOOLEAN(),
-            default: false
+            defaultValue: false
         },
     },
     { underscored: true}
     );
+
+    User.beforeCreate(async (user) => {
+        const saltRound = 3;
+        const hash = await bcrypt.hash(user.password, saltRound);
+        user.password = hash
+    })
+    return User
 };
+
