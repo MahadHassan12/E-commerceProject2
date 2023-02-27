@@ -9,10 +9,10 @@ const verifyToken = (req, res, next)=>{
             req.user = user;
             next();
         });
-    }else{
+    } else{
         return res.status(401).json('You are not auth..!')
     }
-};
+}
 
 const verifyTokenAndAuth = (req, res, next)=>{
     verifyToken(req, res, ()=>{
@@ -23,6 +23,7 @@ const verifyTokenAndAuth = (req, res, next)=>{
         }
     })
 }
+
 const verifyTokenAndAdmin = (req, res, next)=>{
     verifyToken(req, res, ()=>{
         if(req.user.isAdmin){

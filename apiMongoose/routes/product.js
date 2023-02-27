@@ -3,7 +3,7 @@ const Product = require('../models/Product')
 
 const router = require('express').Router();
 
-//Create
+// Create
 router.post('/', verifyTokenAndAdmin, async (req, res)=>{
     const newproduct = new Product(req.body);
 
@@ -15,7 +15,7 @@ router.post('/', verifyTokenAndAdmin, async (req, res)=>{
     }
 })
 
-//Update
+// Update
 router.put('/:id', verifyTokenAndAdmin, async(req, res) =>{
 
     try{
@@ -28,7 +28,7 @@ router.put('/:id', verifyTokenAndAdmin, async(req, res) =>{
     }
 });
 
-// //Delete
+// Delete
 router.delete('/:id', verifyTokenAndAdmin, async (req, res)=>{
     try{
         await Product.findByIdAndDelete(req.params.id)
@@ -38,7 +38,7 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res)=>{
     }
 });
 
-// //Get Product
+// Get Product
 router.get('/find/:id', async (req, res)=>{
     try{
         const product = await Product.findById(req.params.id)
@@ -49,8 +49,7 @@ router.get('/find/:id', async (req, res)=>{
     }
 });
 
-
-// //Get all Products
+// Get all Products
 router.get('/', async (req, res)=>{
     const qNew = req.query.new;
     const qCategory = req.query.category;
@@ -72,7 +71,5 @@ router.get('/', async (req, res)=>{
         res.status(500).json(err)
     }
 });
-
-
 
 module.exports = router;
