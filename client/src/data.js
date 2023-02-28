@@ -43,17 +43,20 @@ export const categories = [
     {
         id: 1,
         img: desktop,
-        title: 'Stationära datorer'
+        title: 'Stationära datorer',
+        cat: 'Stationär'
     },
     {
         id: 2,
         img: laptop2,
-        title: 'Bärbara datorer'
+        title: 'Bärbara datorer',
+        cat: 'Bärbara'
     },
     {
         id: 3,
         img: mobile,
-        title: 'Mobiltelefoner'
+        title: 'Mobiltelefoner',
+        cat: 'Mobil'
     },
 
 ];

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Search, ShoppingCartOutlined} from '@material-ui/icons';
 import { Badge } from '@material-ui/core';
 import { mobile } from '../responsive'
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     background: rgb(14,11,20);
@@ -76,9 +77,12 @@ const navbar = () => {
             </Left>
             <Center><Logo>Pelins El.</Logo></Center>
             <Right>
-
+                <Link to={`/login/`}>
+                <MenuItem>LOGIN</MenuItem>
+                </Link>
+                <Link to={`/register`}>
                 <MenuItem>REGISTER</MenuItem>
-                <MenuItem>SIGN IN</MenuItem>
+                </Link>
                 <Badge badgeContent={4} color="primary">
                     <ShoppingCartOutlined/>
                 </Badge>
