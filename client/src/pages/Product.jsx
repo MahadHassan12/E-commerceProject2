@@ -5,6 +5,13 @@ import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
 import { Add, Remove } from "@material-ui/icons"
 import { mobile } from "../responsive"
+import { useLocation } from "react-router-dom"
+import { useState } from "react"
+import { useEffect } from "react"
+import { publicRequest } from "../requestMethods"
+import axios from 'axios';
+
+
 
 const Container = styled.div`
 
@@ -110,24 +117,37 @@ const Button = styled.button`
 
 
 const Product = () => {
+    const location = useLocation();
+    const id = location.pathname.split('/')[2];
+
+    const [product, setProduct] = useState({});
+
+    useEffect(()=>{
+        const getProduct = async () => {
+            try{
+                // const res = await publicRequest.get('/products/find/' + id);
+                const res = await axios.get(
+                    id
+                    ? 'http://localhost:5000/api/products/find/'+ id :
+                    'http://localhost:5000/api/products/find/');
+                setProduct(res.data);
+            }catch{
+}
+        };
+        getProduct();
+    }, [id]);
   return (
     <Container>
         <Navbar />
         <Announcement />
         <Wrapper>
             <ImgContainer>
-                <Image src ='https://www.komplett.se/img/p/1153/1216520_1.jpg'/>
+                <Image src ={product.img}/>
             </ImgContainer>
             <InfoContainer>
-                <Title>Acer Aspire</Title>
-                <Desc>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Aliquam id arcu quis magna porttitor venenatis feugiat eget nulla. 
-                Donec sit amet turpis magna.Donec vestibulum, nibh non tincidunt ultricies,
-                 urna augue euismod tortor,eget vehicula ex neque ac eros. Cras id justo lectus.
-                 Mauris pellentesque risus a maximus congue.
-                </Desc>
-                <Price>10000 kr</Price>
+                <Title>{product.title}</Title>
+                <Desc>{product.desc}</Desc>
+                <Price>{product.price}: kr</Price>
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Färg</FilterTitle>

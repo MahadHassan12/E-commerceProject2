@@ -60,7 +60,7 @@ const ProductList = () => {
     <Container>
         <Navbar/>
         <Announcement />
-        <Title>Stationära Datorer</Title>
+        <Title>{decodeURI(cat)}</Title>
         <FilterContainer>
             <Filter>
                 <FilterText >Filtera produkter</FilterText>
