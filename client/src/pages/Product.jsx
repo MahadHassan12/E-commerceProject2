@@ -10,6 +10,8 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { publicRequest } from "../requestMethods"
 import axios from 'axios';
+import { addProduct } from "../redux/cartRedux"
+import { useDispatch } from "react-redux"
 
 
 
@@ -124,6 +126,7 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState('');
     const [size, setSize] = useState('');
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         const getProduct = async () => {
@@ -149,8 +152,10 @@ const Product = () => {
     };
 
     const handleClick = ()=> {
-        //uppdatera shoppingCart
-        
+        dispatch(
+
+        addProduct({...product, quantity, color, size}));
+
     }
   return (
     <Container>
