@@ -14,7 +14,7 @@ import axios from 'axios';
 
 
 const Container = styled.div`
-
+    background-color: #E6E6FA
 `
 const Wrapper = styled.div`
     padding: 50px;
@@ -121,6 +121,9 @@ const Product = () => {
     const id = location.pathname.split('/')[2];
 
     const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [color, setColor] = useState('');
+    const [size, setSize] = useState('');
 
     useEffect(()=>{
         const getProduct = async () => {
@@ -136,6 +139,19 @@ const Product = () => {
         };
         getProduct();
     }, [id]);
+
+    const handleQuantity = (type) => {
+        if(type === 'dec'){
+            quantity > 1 && setQuantity(quantity - 1)
+        }else {
+            setQuantity(quantity + 1)
+        }
+    };
+
+    const handleClick = ()=> {
+        //uppdatera shoppingCart
+        
+    }
   return (
     <Container>
         <Navbar />
@@ -151,28 +167,28 @@ const Product = () => {
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Färg</FilterTitle>
-                        <FilterColor color='black'/>
-                        <FilterColor color='darkblue'/>
-                        <FilterColor color='gray'/>
+                        {product.color?.map((c) => (
+                             <FilterColor color={c} key={c} onClick={() =>setColor(c)}/>
+                        ))}
                     </Filter>
                     <Filter>
 
                         <FilterTitle>Storlek</FilterTitle>
-                        <FilterSize>
-                            <FilterSizeOption>Liten</FilterSizeOption>
-                            <FilterSizeOption>Mellan</FilterSizeOption>
-                            <FilterSizeOption>Stor</FilterSizeOption>
+                        <FilterSize onChange={(e) =>setSize(e.target.value)}>
+                            {product.size?.map((s) => (
+                                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                            ))}
                         </FilterSize>
                     </Filter>
                 </FilterContainer>
                 <AddContainer>
 
                     <AmountContainer>
-                        <Remove />
-                        <Amount>1</Amount>
-                        <Add />
+                        <Remove onClick={()=> handleQuantity('dec')}/>
+                        <Amount>{quantity}</Amount>
+                        <Add onClick={()=> handleQuantity('inc')}/>
                     </AmountContainer>
-                    <Button>Lägg till i varukrog</Button>
+                    <Button onClick={handleClick}>Lägg till i varukrog</Button>
                 </AddContainer>
             </InfoContainer>
         </Wrapper>

@@ -66,9 +66,9 @@ const ProductList = () => {
                 <FilterText >Filtera produkter</FilterText>
                 <Select name ='color' onChange={handleFilters}>
                     <Option disabled >Färg</Option>
-                    <Option>Svart</Option>
-                    <Option>Vit</Option>
-                    <Option>Grå</Option>
+                    <Option>black</Option>
+                    <Option>white</Option>
+                    <Option>gray</Option>
                 </Select>
                 <Select name ='size' onChange={handleFilters}>
                     <Option disabled >Storlek skärm</Option>
