@@ -14,8 +14,7 @@ const Container = styled.div`
 const Announcement = () => {
   return (
     <Container>
-        <p>Super Deal! Fri frakt vid beställningar över 1000 kr</p>
-        <p>Köp två betala för tre!</p>
+        <p>Super Deal! Fri frakt vid beställningar över 1000 kr. Köp två betala för en!  </p>
     </Container>
   )
 }

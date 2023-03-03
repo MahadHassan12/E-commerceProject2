@@ -1,4 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
@@ -6,7 +7,7 @@ import Navbar from '../components/Navbar'
 import { mobile } from "../responsive";
 
 const Container = styled.div`
-
+    background-color: #E6E6FA
 `;
 const Wrapper = styled.div`
     padding: 20px;
@@ -142,6 +143,7 @@ const Button= styled.button`
 
 
 const Cart = () => {
+    const cart = useSelector(state=> state.cart)
   return (
     <Container>
         <Navbar />
@@ -158,55 +160,37 @@ const Cart = () => {
             </Top>
             <Bottom>
                 <Info>
-                    <Product>
+                  { cart.products.map(product=>(
+
+                  <Product>
                         <ProductDetail>
-                            <Image src='https://images.ctfassets.net/vx12w8gtks6f/24sfOj9jVxMnn25LeQgWq0/1fc54e74093b0ebfdfd42e89c1f86961/iPhone_14_Blue_PDP_Image_Position-1_CAEN.jpg' />
+                            <Image src={product.img} />
                             <Details>
-                                <ProductName><b>Produkt:</b> Iphone 14</ProductName>
-                                <ProductId><b>ID:</b> 65545255</ProductId>
-                                <ProductColor color='lightblue'/>
-                                <ProductSize><b>STORLEK:</b> 146 cm</ProductSize>
+                                <ProductName><b>Produkt:</b> {product.title}</ProductName>
+                                <ProductId><b>ID:</b> {product._id}</ProductId>
+                                <ProductColor color={product.color}/>
+                                <ProductSize><b>{product.size}</b> </ProductSize>
                             </Details>
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
                                 <Add />
-                                <ProductAmount>2</ProductAmount>
+                                <ProductAmount>{product.quantity}</ProductAmount>
                                 <Remove />
                             </ProductAmountContainer>
-                            <ProductPrice>$ 14000 kr</ProductPrice>
+                            <ProductPrice>{product.price * product.quantity}kr </ProductPrice>
                         
 
                         </PriceDetail>
                     </Product>
+                    ))}
                     <Hr />
-                    <Product>
-                        <ProductDetail>
-                            <Image src='https://m.media-amazon.com/images/I/71sesDsw95L._AC_SL1500_.jpg' />
-                            <Details>
-                                <ProductName><b>Produkt:</b> Bärbara dator: Acer Aspire</ProductName>
-                                <ProductId><b>ID:</b> 6569841</ProductId>
-                                <ProductColor color='black'/>
-                                <ProductSize><b>STORLEK:</b> 8 GB</ProductSize>
-                            </Details>
-                        </ProductDetail>
-                        <PriceDetail>
-                            <ProductAmountContainer>
-                                <Add />
-                                <ProductAmount>2</ProductAmount>
-                                <Remove />
-                            </ProductAmountContainer>
-                            <ProductPrice>$ 8000 kr</ProductPrice>
-                        
-
-                        </PriceDetail>
-                    </Product>
                 </Info>
                 <Summary>
                     <SummaryTitle>Beställning översikt</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Delsumma</SummaryItemText>
-                        <SummaryItemPrice>$ 22000 kr</SummaryItemPrice>
+                        <SummaryItemPrice>{cart.total}: kr</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Beräknad Frakt</SummaryItemText>
@@ -218,7 +202,7 @@ const Cart = () => {
                     </SummaryItem>
                     <SummaryItem type='total'>
                         <SummaryItemText>Total kostnad</SummaryItemText>
-                        <SummaryItemPrice>$ 22000 kr</SummaryItemPrice>
+                        <SummaryItemPrice>{cart.total}: kr</SummaryItemPrice>
                     </SummaryItem>
                     <Button>CHECKOUT NU</Button>
                 </Summary>
