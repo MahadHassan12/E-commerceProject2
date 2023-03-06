@@ -1,5 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components"
+import { login } from "../redux/callsApi";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
     width: 100wh;
@@ -47,6 +50,10 @@ const Button = styled.button`
     color: white;
     cursor: pointer;
     margin-bottom: 10px;
+    &:disabled{
+        color: green;
+        cursor: not-allowed
+    }
 `;
 
 const Link = styled.a`
@@ -56,16 +63,29 @@ const Link = styled.a`
     cursor: pointer;
 `;
 
+const Error = styled.span`
+    color:red;
+`
+
 
 const Login = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const {isFetching, error} = useSelector((state) => state.user);
+    const handleClick = (e) =>{
+        e.preventDefault();
+        login(dispatch, {username, password});
+    }
   return (
     <Container>
         <Wrapper>
             <Title>LOGGA IN</Title>
             <Form>
-                <Input placeholder='användarnamn'/>
-                <Input placeholder='lösenord'/>
-                <Button>Logga In</Button>
+                <Input placeholder='användarnamn'  onChange={(e)=>setUsername(e.target.value)}/>
+                <Input placeholder='lösenord' type='password' onChange={(e)=>setPassword(e.target.value)}/>
+                <Button onClick={handleClick} disabled={isFetching}>Logga In</Button>
+                {error && <Error>Något blev fel!...</Error>}
                 <Link>kommer ej ihåg lösenord?</Link>
                 <Link>SKAPA NY KONTO </Link>
             </Form>
