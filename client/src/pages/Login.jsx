@@ -86,7 +86,7 @@ const Login = () => {
                 <Input placeholder='lösenord' type='password' onChange={(e)=>setPassword(e.target.value)}/>
                 <Button onClick={handleClick} disabled={isFetching}>Logga In</Button>
                 {error && <Error>Något blev fel!...</Error>}
-                <Link>kommer ej ihåg lösenord?</Link>
+                <Link>Kommer ej ihåg lösenord?</Link>
                 <Link>SKAPA NY KONTO </Link>
             </Form>
         </Wrapper>

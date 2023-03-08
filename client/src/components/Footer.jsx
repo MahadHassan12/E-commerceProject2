@@ -107,7 +107,7 @@ const Footer = () => {
                 <ListItem>Start sida</ListItem>
                 <ListItem>Varukorg</ListItem>
                 <ListItem>Hem elektronik</ListItem>
-                <ListItem>Min Konto</ListItem>
+                <ListItem>Mitt Konto</ListItem>
                 <ListItem>Villkor</ListItem>
                 <ListItem>Önskelista</ListItem>
                 <ListItem>Spåra beställning</ListItem>
