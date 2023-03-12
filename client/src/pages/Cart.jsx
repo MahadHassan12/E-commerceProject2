@@ -165,12 +165,12 @@ const Cart = () => {
                     amount: cart.total*100, 
                     
                 });
-                history.push('/success', {data:res.data});
+                history('/success', {data:res.data});
                 
             }catch {}
             
         }
-        stripeToken && makeRequest();
+        stripeToken && cart.total >= 1 && makeRequest();
     }, [stripeToken, cart.total, history])
   return (
     <Container>
@@ -235,7 +235,7 @@ const Cart = () => {
                     <StripeCheckout name='Pelins El' image=''
                         billingAddress
                         shippingAddress
-                        description=' Din totala summa är {cart.total} kr'
+                        description={` Din totala summa är ${cart.total} kr`}
                         amount={cart.total*100}
                         token={onToken}
                         stripeKey={keyStripe}
