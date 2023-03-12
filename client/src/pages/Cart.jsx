@@ -5,6 +5,13 @@ import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import Navbar from '../components/Navbar'
 import { mobile } from "../responsive";
+import StripeCheckout from 'react-stripe-checkout';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
+const keyStripe = 'pk_test_51MkkSXLXMdQWK0nFzSF6hpnNVtGle6vof1kukKhgETqjF0RSvHVYTuNuHJjrpKqHHUq1HvLwl7YAxjauA3g6Csw500zxcM4Iuc'
+
 
 const Container = styled.div`
     background-color: #E6E6FA
@@ -143,7 +150,28 @@ const Button= styled.button`
 
 
 const Cart = () => {
-    const cart = useSelector(state=> state.cart)
+    const cart = useSelector(state=> state.cart);
+    const [stripeToken, setStripeToken] = useState(null)
+    const history = useNavigate()
+    const onToken = (token)=> {
+        setStripeToken(token);
+    }
+    useEffect(() => {
+        const makeRequest = async () =>{
+            try{
+                const res = await axios.post('http://localhost:5000/api/checkout/payment',
+                {
+                    tokenId: stripeToken.id,
+                    amount: cart.total*100, 
+                    
+                });
+                history.push('/success', {data:res.data});
+                
+            }catch {}
+            
+        }
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, history])
   return (
     <Container>
         <Navbar />
@@ -156,7 +184,7 @@ const Cart = () => {
                     <TopText>Varukorg (2)</TopText>
                     <TopText>Önskelista (0)</TopText>
                 </TopTexts>
-                <TopButton type='filled'>Till checkout</TopButton>
+                <TopButton type='red'>Töm varukorg</TopButton>
             </Top>
             <Bottom>
                 <Info>
@@ -204,7 +232,18 @@ const Cart = () => {
                         <SummaryItemText>Total kostnad</SummaryItemText>
                         <SummaryItemPrice>{cart.total}: kr</SummaryItemPrice>
                     </SummaryItem>
-                    <Button>CHECKOUT NU</Button>
+                    <StripeCheckout name='Pelins El' image=''
+                        billingAddress
+                        shippingAddress
+                        description=' Din totala summa är {cart.total} kr'
+                        amount={cart.total*100}
+                        token={onToken}
+                        stripeKey={keyStripe}
+                    >
+
+            
+                        <Button>Betala Nu</Button>
+                     </StripeCheckout>
                 </Summary>
             </Bottom>
         </Wrapper>

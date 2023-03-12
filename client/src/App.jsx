@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
+import Pay from "./pages/Pay";
+import Success from "./pages/Success";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -19,6 +21,10 @@ const App = () => {
     <Router>
       <Routes>
       <Route path='/' element={<Home/>} />
+      <Route path='/pay' element={<Pay/>} />
+      {/* <Pay /> */}
+      <Route path='/success' element={<Success/>} />
+      {/* <Success /> */}
       <Route path='/products/:category' element={<ProductList/>} />
       <Route path='/product/:id' element={<Product/>} />
       <Route path='/cart' element={<Cart/>} />
