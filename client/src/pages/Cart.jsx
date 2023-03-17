@@ -165,12 +165,15 @@ const Cart = () => {
                     amount: cart.total*100, 
                     
                 });
-                history('/success', {data:res.data});
+                history('/success', {
+                    Stripedata: res.data,
+                    products: cart,
+                });
                 
             }catch {}
             
         }
-        stripeToken && cart.total >= 1 && makeRequest();
+        stripeToken && makeRequest();
     }, [stripeToken, cart.total, history])
   return (
     <Container>
@@ -232,7 +235,7 @@ const Cart = () => {
                         <SummaryItemText>Total kostnad</SummaryItemText>
                         <SummaryItemPrice>{cart.total}: kr</SummaryItemPrice>
                     </SummaryItem>
-                    <StripeCheckout name='Pelins El' image=''
+                    <StripeCheckout name='Pelins El' image='https://cdn.discordapp.com/attachments/1065343328163467517/1084898410907316354/Untitled-1.png'
                         billingAddress
                         shippingAddress
                         description={` Din totala summa är ${cart.total} kr`}
