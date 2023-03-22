@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
         password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString(),
     });
     try{
-        const savedUser = await newUser.save();
+        const savedUser = await newUser.save(); 
         res.status(201).json(savedUser);
     }catch(err){
         res.status(500).json(err);
