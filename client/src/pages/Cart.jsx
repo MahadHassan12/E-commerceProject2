@@ -225,14 +225,14 @@ const Cart = () => {
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Beräknad Frakt</SummaryItemText>
-                        <SummaryItemPrice>$ 100 kr</SummaryItemPrice>
+                        <SummaryItemPrice> 100 kr</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Fraktrabatt</SummaryItemText>
-                        <SummaryItemPrice>$ -100 kr</SummaryItemPrice>
+                        <SummaryItemPrice> -100 kr</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem type='total'>
-                        <SummaryItemText>Total kostnad</SummaryItemText>
+                        <SummaryItemText>Total kostnad</SummaryItemText> 
                         <SummaryItemPrice>{cart.total}: kr</SummaryItemPrice>
                     </SummaryItem>
                     <StripeCheckout name='Pelins El' image='https://cdn.discordapp.com/attachments/1065343328163467517/1084898410907316354/Untitled-1.png'
